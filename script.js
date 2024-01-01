@@ -111,3 +111,41 @@ document.body.appendChild(c.el);
 
 var clock = new Clock();
 document.body.appendChild(clock.el);
+
+const orderStep = document.getElementById('orderStep');
+const packedStep = document.getElementById('packedStep');
+const transitStep = document.getElementById('transitStep');
+const deliveryStep = document.getElementById('deliveryStep');
+
+const animateStep = (step, color) => {
+  step.style.backgroundColor = color;
+  step.classList.add('green');
+};
+
+const startAnimation = () => {
+  setTimeout(() => {
+    animateStep(orderStep, '#5cb85c'); // Green
+    setTimeout(() => {
+      animateStep(packedStep, '#5cb85c');
+      setTimeout(() => {
+        animateStep(transitStep, '#5cb85c');
+        setTimeout(() => {
+          animateStep(deliveryStep, '#5cb85c');
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+};
+
+// Initial animation
+startAnimation();
+
+// Continuous animation loop
+setInterval(() => {
+  orderStep.classList.remove('green');
+  packedStep.classList.remove('green');
+  transitStep.classList.remove('green');
+  deliveryStep.classList.remove('green');
+
+  startAnimation();
+}, 5000); // Adjust the interval as needed (5000 milliseconds = 5 seconds)
