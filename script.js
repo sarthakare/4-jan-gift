@@ -107,7 +107,7 @@ function Clock(countdown, callback) {
 
 var deadline = new Date('January 4, 2024 00:00:00');
 var c = new Clock(deadline, function () {
-  alert('countdown complete');
+  alert('Happy Birthday Apurva. please click on OK.');
   window.location.href = 'index2.html';
 });
 document.body.appendChild(c.el);
