@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Video with Birthday Message</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        #birthdayMessage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #fff;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .image-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 50px;
+            /* Adjust the gap between images */
+            z-index: -1;
+        }
+
+        .motion-image {
+            width: 300px;
+            height: 300px;
+            animation: explode 2s forwards, circle 4s linear infinite, dance 2s alternate infinite;
+        }
+
+
+        @keyframes circle {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dance {
+            to {
+                transform: translateY(5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <video id="fullscreenVideo" autoplay controls>
+        <source src="ak bd video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div id="birthdayMessage">Happy Birthday!</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var video = document.getElementById("fullscreenVideo");
+            var birthdayMessage = document.getElementById("birthdayMessage");
+            var images = [
+                "images/img1.jpg",
+                "images/img2.jpg",
+                "images/img3.jpg",
+                "images/img4.jpg",
+                "images/img5.jpg",
+                "images/img6.jpg"
+            ];
+
+            video.addEventListener("ended", function () {
+                video.style.display = "none"; // Hide the video player
+                birthdayMessage.style.display = "block";
+
+                // Display and animate images
+                var container = document.createElement("div");
+                container.className = "image-container";
+                document.body.appendChild(container);
+
+                for (var i = 0; i < images.length; i++) {
+                    createImage(images[i], container);
+                }
+            });
+
+            function createImage(src, container) {
+                var img = new Image();
+                img.src = src;
+                img.className = "motion-image";
+
+                container.appendChild(img);
+            }
+        });
+    </script>
+</body>
+
+</html>
